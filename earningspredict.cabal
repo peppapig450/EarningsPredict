@@ -64,9 +64,12 @@ executable earningspredict
     -- Modules included in this executable, other than Main.
     other-modules:    API
                       , DataParsing
+                      , Utils
                       , API.FetchUpcomingEarnings
                       , DataParsing.DataTypes
                       , DataParsing.ParseEarningsData
+                      , Utils.DateUtils
+                      , Utils.IOUtils
 
 
     -- LANGUAGE extensions used by modules in this package.
@@ -78,6 +81,7 @@ executable earningspredict
                       , http-conduit
                       , bytestring
                       , text
+                      , time
 
 
     -- Directories containing source files.
