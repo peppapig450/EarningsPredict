@@ -1,23 +1,17 @@
 module Main where
 import API
 import DataParsing
-import System.Environment (lookupEnv)
+import Utils
 
--- Define data type for earnigns calendar json response string
-
-apiKey :: IO String
-apiKey = do
-    maybeApiKey <- lookupEnv "API_KEY"
-    case maybeApiKey of
-        Just key -> return key
-        Nothing  -> error "Missing API_KEY environment variable"
 
 
 main :: IO ()
 main = do
-    -- Define the dates
-    let fromDate = "2024-05-10"
-    let toDate = "2024-05-31"
+
+    -- Format the dates as strings
+    fromDate <- getCurrentDatePlusOneDay
+    toDate <- getCurrentDatePlusTwoDays
+    apiKey <- getApiKey
 
     -- Fetch upcoming earnings data
     earningsAPIResult <- fetchUpcomingEarnings fromDate toDate apiKey
