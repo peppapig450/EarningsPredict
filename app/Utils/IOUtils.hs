@@ -6,7 +6,7 @@ import System.Environment (lookupEnv)
 
 getApiKey :: IO String
 getApiKey = do
-    maybeApiKey <- lookupEnv "API_KEY"
+    maybeApiKey <- lookupEnv "fmp_api_key"
     case maybeApiKey of
         Just key -> return key
         Nothing  -> error "Missing API_KEY environment variable"
