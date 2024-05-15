@@ -1,6 +1,7 @@
 import fmpsdk
 import json
 import re
+import os
 
 
 def get_upcoming_earnings(api_key, from_date, to_date):
@@ -31,7 +32,7 @@ def get_historical_earnings_data(api_key, filtered_symbols):
 
 
 if __name__ == "__main__":
-    fmp_api_key = "1Bo8cqgwItUyx0emLvZOFv2GGX20Bbmm"
+    fmp_api_key = os.get.env("fmp_api_key")
 
     upcoming_earnings_symbols = get_upcoming_earnings(
         fmp_api_key, "2024-05-16", "2024-05-18"
