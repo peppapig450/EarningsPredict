@@ -42,22 +42,19 @@
 ## Earnings Call Transcripts:
 - After the earnings announcement, gather transcripts or summaries of the earnings calls for each company to understand management's commentary and guidance.
 ---
-
 ```mermaid
 erDiagram
+    EarningsSymbol ||--o{ HistoricalPriceData : has
     EarningsSymbol {
-        symbol VARCHAR
-        PRIMARY KEY symbol
+        symbol VARCHAR PK
     }
     HistoricalPriceData {
-        symbol VARCHAR
-        date DATE
+        date DATE PK
         price DECIMAL
-        PRIMARY KEY (symbol, date)
-        FOREIGN KEY (symbol) REFERENCES EarningsSymbol(symbol)
+        symbol VARCHAR PK, FK
     }
+    EarningsSymbol ||--o{ FundamentalMetrics : has
     FundamentalMetrics {
-        symbol VARCHAR
         eps DECIMAL
         revenueGrowthRate DECIMAL
         profitMargin DECIMAL
@@ -65,49 +62,44 @@ erDiagram
         debtToEquityRatio DECIMAL
         roe DECIMAL
         dividendYield DECIMAL
-        PRIMARY KEY symbol
-        FOREIGN KEY (symbol) REFERENCES EarningsSymbol(symbol)
+        symbol VARCHAR PK, FK
     }
+    EarningsSymbol ||--o{ AnalystEstimates : has
     AnalystEstimates {
-        symbol VARCHAR
         earningsEstimate DECIMAL
         averagePriceTarget DECIMAL
         recommendation VARCHAR
-        PRIMARY KEY symbol
-        FOREIGN KEY (symbol) REFERENCES EarningsSymbol(symbol)
+        symbol VARCHAR PK, FK
     }
+    EarningsSymbol ||--o{ MarketSentimentIndicators : has
     MarketSentimentIndicators {
-        symbol VARCHAR
         shortInterestRatio DECIMAL
         putCallRatio DECIMAL
         socialMediaSentiment VARCHAR
-        PRIMARY KEY symbol
-        FOREIGN KEY (symbol) REFERENCES EarningsSymbol(symbol)
+        symbol VARCHAR PK, FK
     }
+    EarningsSymbol ||--o{ IndustrySectorData : has
     IndustrySectorData {
-        symbol VARCHAR
         industrySpecificMetrics VARCHAR
         sectorTrends VARCHAR
-        PRIMARY KEY symbol
-        FOREIGN KEY (symbol) REFERENCES EarningsSymbol(symbol)
+        symbol VARCHAR PK, FK
     }
+    EarningsSymbol ||--o{ CompanyNewsEvents : has
     CompanyNewsEvents {
-        symbol VARCHAR
-        newsEventText TEXT
-        PRIMARY KEY (symbol, newsEventText)
-        FOREIGN KEY (symbol) REFERENCES EarningsSymbol(symbol)
+        newsEventText TEXT PK
+        symbol VARCHAR PK, FK
+
     }
+    EarningsSymbol ||--o{ VolatilityTradingVolume : has
     VolatilityTradingVolume {
-        symbol VARCHAR
         volatility DECIMAL
         tradingVolume DECIMAL
-        PRIMARY KEY symbol
-        FOREIGN KEY (symbol) REFERENCES EarningsSymbol(symbol)
+        symbol VARCHAR PK, FK
     }
+    EarningsSymbol ||--o{ EarningsCallTranscripts : has
     EarningsCallTranscripts {
-        symbol VARCHAR
-        transcriptText TEXT
-        PRIMARY KEY (symbol, transcriptText)
-        FOREIGN KEY (symbol) REFERENCES EarningsSymbol(symbol)
+        transcriptText TEXT PK
+        symbol VARCHAR PK, FK
+
     }
 ```
