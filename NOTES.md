@@ -41,3 +41,73 @@
 
 ## Earnings Call Transcripts:
 - After the earnings announcement, gather transcripts or summaries of the earnings calls for each company to understand management's commentary and guidance.
+---
+
+```mermaid
+erDiagram
+    EarningsSymbol {
+        symbol VARCHAR
+        PRIMARY KEY symbol
+    }
+    HistoricalPriceData {
+        symbol VARCHAR
+        date DATE
+        price DECIMAL
+        PRIMARY KEY (symbol, date)
+        FOREIGN KEY (symbol) REFERENCES EarningsSymbol(symbol)
+    }
+    FundamentalMetrics {
+        symbol VARCHAR
+        eps DECIMAL
+        revenueGrowthRate DECIMAL
+        profitMargin DECIMAL
+        peRatio DECIMAL
+        debtToEquityRatio DECIMAL
+        roe DECIMAL
+        dividendYield DECIMAL
+        PRIMARY KEY symbol
+        FOREIGN KEY (symbol) REFERENCES EarningsSymbol(symbol)
+    }
+    AnalystEstimates {
+        symbol VARCHAR
+        earningsEstimate DECIMAL
+        averagePriceTarget DECIMAL
+        recommendation VARCHAR
+        PRIMARY KEY symbol
+        FOREIGN KEY (symbol) REFERENCES EarningsSymbol(symbol)
+    }
+    MarketSentimentIndicators {
+        symbol VARCHAR
+        shortInterestRatio DECIMAL
+        putCallRatio DECIMAL
+        socialMediaSentiment VARCHAR
+        PRIMARY KEY symbol
+        FOREIGN KEY (symbol) REFERENCES EarningsSymbol(symbol)
+    }
+    IndustrySectorData {
+        symbol VARCHAR
+        industrySpecificMetrics VARCHAR
+        sectorTrends VARCHAR
+        PRIMARY KEY symbol
+        FOREIGN KEY (symbol) REFERENCES EarningsSymbol(symbol)
+    }
+    CompanyNewsEvents {
+        symbol VARCHAR
+        newsEventText TEXT
+        PRIMARY KEY (symbol, newsEventText)
+        FOREIGN KEY (symbol) REFERENCES EarningsSymbol(symbol)
+    }
+    VolatilityTradingVolume {
+        symbol VARCHAR
+        volatility DECIMAL
+        tradingVolume DECIMAL
+        PRIMARY KEY symbol
+        FOREIGN KEY (symbol) REFERENCES EarningsSymbol(symbol)
+    }
+    EarningsCallTranscripts {
+        symbol VARCHAR
+        transcriptText TEXT
+        PRIMARY KEY (symbol, transcriptText)
+        FOREIGN KEY (symbol) REFERENCES EarningsSymbol(symbol)
+    }
+```
